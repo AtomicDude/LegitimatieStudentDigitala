@@ -19,18 +19,24 @@ namespace LegitimatieStudentDigitala.Models
 
     public enum role
     {
-        Student, Admin
+        User, Admin
     }
 
     public class User : BaseEntity
     {
         [Required]
-        [StringLength(50, ErrorMessage = "Parola trebuie sa aiba minim {2} caractere si maxim {0}.", MinimumLength = 1)]
+        [StringLength(50)]
         public string Nume { get; set; }
 
         [Required]
-        [StringLength(50, ErrorMessage = "Parola trebuie sa aiba minim {2} caractere si maxim {0}.", MinimumLength = 1)]
+        [StringLength(50)]
         public string Prenume { get; set; }
+
+        [Required,StringLength(50)]
+        public string Initiala_Tata { get; set; }
+
+        [Required, StringLength(13)]
+        public string CNP { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -38,7 +44,7 @@ namespace LegitimatieStudentDigitala.Models
         public string Mail { get; set; }
 
         [Required]
-        [StringLength(64, ErrorMessage = "Parola trebuie sa aiba minim {2} caractere si maxim {0}.", MinimumLength = 8)]
+        [StringLength(64)]
         [DataType(DataType.Password)]
         public string Parola { get; set; }
 
@@ -51,11 +57,14 @@ namespace LegitimatieStudentDigitala.Models
         [Range(0, 4)]
         public uint An_Curent { get; set; }
 
+        [Required]
+        public string Serie_Legitimatie { get; set; }
+
         public string Cod_Legitimatie { get; set; }
 
         public string Path_Poza { get; set; }
 
-        public role Rol { get; } = role.Student;
+        public role Rol { get; } = role.User;
 
     }
 }

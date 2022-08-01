@@ -22,7 +22,7 @@ namespace LegitimatieStudentDigitala.Controllers
         {
             var facultate = facultateRepository.GetByName(Nume);
             if (facultate == null)
-                return NotFound();
+                return NotFound( new { message = "Facultatea introdusa nu exista"});
             return Ok(facultate);
         }
 

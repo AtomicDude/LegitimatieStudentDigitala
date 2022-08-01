@@ -24,6 +24,8 @@ namespace LegitimatieStudentDigitala.Models
 
         public Forma_Invatamant Forma_Invatamant { get; set; }
 
+        public Studiu_Universitar Studiu_Universitar { get; set; }
+
         [Required]
         [Range(0, 4)]
         public uint Numar_Ani { get; set; }

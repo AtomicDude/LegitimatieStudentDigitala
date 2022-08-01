@@ -46,6 +46,7 @@ namespace LegitimatieStudentDigitala.Controllers
             {
                 Nume = dto.Nume,
                 Prenume = dto.Prenume,
+                Initiala_Tata = dto.Initiala_Tata,
                 Mail = dto.Mail,
                 Parola = BCryptNet.HashPassword(dto.Parola),
                 Forma_Finantare = Enum.Parse<Forma_Finantare>(dto.Forma_Finantare),
