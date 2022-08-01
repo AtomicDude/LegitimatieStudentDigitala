@@ -20,8 +20,6 @@ namespace LegitimatieStudentDigitala.Models
         [StringLength(50, ErrorMessage = "Numele trebuie sa aiba maxim {0} caractere.")]
         public string Nume { get; set; }
 
-        public virtual ICollection<User> Useri { get; set; }
-
         public Forma_Invatamant Forma_Invatamant { get; set; }
 
         public Studiu_Universitar Studiu_Universitar { get; set; }
@@ -29,6 +27,10 @@ namespace LegitimatieStudentDigitala.Models
         [Required]
         [Range(0, 4)]
         public uint Numar_Ani { get; set; }
+
+        public string Cod_Domeniu { get; set; }
+
+        public string Cod_Facultate { get; set; }
 
     }
 }

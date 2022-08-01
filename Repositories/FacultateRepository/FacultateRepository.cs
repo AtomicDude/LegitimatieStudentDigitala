@@ -16,5 +16,10 @@ namespace LegitimatieStudentDigitala.Repositories.FacultateRepository
         {
             return _table.FirstOrDefault(x => x.Nume.Equals(name));
         }
+
+        public Facultate GetByCod(string cod)
+        {
+            return _table.FirstOrDefault(x => x.Cod_Facultate.Equals(cod));
+        }
     }
 }

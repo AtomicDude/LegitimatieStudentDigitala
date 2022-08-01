@@ -4,14 +4,16 @@ using LegitimatieStudentDigitala.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LegitimatieStudentDigitala.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220801114848_Updated domeniu and facultate")]
+    partial class Updateddomeniuandfacultate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,6 +134,9 @@ namespace LegitimatieStudentDigitala.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("FacultateId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Forma_Finantare")
                         .HasColumnType("int");
 
@@ -174,7 +179,21 @@ namespace LegitimatieStudentDigitala.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FacultateId");
+
                     b.ToTable("Useri");
+                });
+
+            modelBuilder.Entity("LegitimatieStudentDigitala.Models.User", b =>
+                {
+                    b.HasOne("LegitimatieStudentDigitala.Models.Facultate", null)
+                        .WithMany("Administratori")
+                        .HasForeignKey("FacultateId");
+                });
+
+            modelBuilder.Entity("LegitimatieStudentDigitala.Models.Facultate", b =>
+                {
+                    b.Navigation("Administratori");
                 });
 #pragma warning restore 612, 618
         }

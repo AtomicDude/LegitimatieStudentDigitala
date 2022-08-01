@@ -27,8 +27,6 @@ namespace LegitimatieStudentDigitala.Models
         [StringLength(100, ErrorMessage = "Parola trebuie sa aiba minim {2} caractere si maxim {0}.", MinimumLength = 10)]
         public string Adresa { get; set; }
 
-        public virtual ICollection<Domeniu> Domenii { get; set; }
-
-        public virtual ICollection<User> Administratori { get; set; }
+        public string Cod_Facultate { get; set; }
     }
 }

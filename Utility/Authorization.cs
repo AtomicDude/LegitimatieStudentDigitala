@@ -9,8 +9,8 @@ namespace LegitimatieStudentDigitala.Utility
 {
     public class AuthorizationAttribute : Attribute, IAuthorizationFilter
     {
-        private readonly ICollection<role> _roles;
-        public AuthorizationAttribute(params role[] roles)
+        private readonly ICollection<Role> _roles;
+        public AuthorizationAttribute(params Role[] roles)
         {
             _roles = roles;
         }
@@ -28,7 +28,7 @@ namespace LegitimatieStudentDigitala.Utility
             }
 
             var user = (User)context.HttpContext.Items["user"];
-            if (user != null || !_roles.Contains(user.Rol))
+            if (user == null || !_roles.Contains(user.Rol))
             {
                 context.Result = unauthorizationStatusCodeObject;
             }

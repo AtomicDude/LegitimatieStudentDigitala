@@ -17,7 +17,7 @@ namespace LegitimatieStudentDigitala.Models
         Inmatriculat, Exmatriculat
     }
 
-    public enum role
+    public enum Role
     {
         User, Admin
     }
@@ -64,7 +64,9 @@ namespace LegitimatieStudentDigitala.Models
 
         public string Path_Poza { get; set; }
 
-        public role Rol { get; } = role.User;
+        public Role Rol { get; set; }
+
+        public string Cod_Domeniu { get; set; }
 
     }
 }

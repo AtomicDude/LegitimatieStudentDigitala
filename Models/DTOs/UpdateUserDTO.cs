@@ -3,6 +3,7 @@
     public class UpdateUserDTO
     {
         public string Mail { get; set; }
+        public string New_Mail { get; set; }
         public string Nume { get; set; }
         public string Prenume { get; set; }
         public string Initiala_Tata { get; set; }
@@ -13,5 +14,7 @@
         public string Serie_Legitimatie { get; set; }
         public string Cod_Legitimatie { get; set; }
         public string Path_Poza { get; set; }
+        public string Cod_Facultate { get; set; }
+        public string Cod_Domeniu { get; set; }
     }
 }

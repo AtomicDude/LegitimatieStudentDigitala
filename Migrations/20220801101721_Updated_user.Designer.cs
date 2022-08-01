@@ -4,14 +4,16 @@ using LegitimatieStudentDigitala.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LegitimatieStudentDigitala.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220801101721_Updated_user")]
+    partial class Updated_user
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +30,6 @@ namespace LegitimatieStudentDigitala.Migrations
                     b.Property<string>("Cod_Domeniu")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Cod_Facultate")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("DataCreat")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
@@ -38,6 +37,9 @@ namespace LegitimatieStudentDigitala.Migrations
                     b.Property<DateTime?>("DataModificat")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("FacultateId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Forma_Invatamant")
                         .HasColumnType("int");
@@ -54,6 +56,8 @@ namespace LegitimatieStudentDigitala.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FacultateId");
 
                     b.ToTable("Domenii");
                 });
@@ -118,9 +122,6 @@ namespace LegitimatieStudentDigitala.Migrations
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 
-                    b.Property<string>("Cod_Domeniu")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Cod_Legitimatie")
                         .HasColumnType("nvarchar(max)");
 
@@ -131,6 +132,12 @@ namespace LegitimatieStudentDigitala.Migrations
                     b.Property<DateTime?>("DataModificat")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DomeniuId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("FacultateId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Forma_Finantare")
                         .HasColumnType("int");
@@ -162,9 +169,6 @@ namespace LegitimatieStudentDigitala.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("Rol")
-                        .HasColumnType("int");
-
                     b.Property<string>("Serie_Legitimatie")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -174,7 +178,41 @@ namespace LegitimatieStudentDigitala.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DomeniuId");
+
+                    b.HasIndex("FacultateId");
+
                     b.ToTable("Useri");
+                });
+
+            modelBuilder.Entity("LegitimatieStudentDigitala.Models.Domeniu", b =>
+                {
+                    b.HasOne("LegitimatieStudentDigitala.Models.Facultate", null)
+                        .WithMany("Domenii")
+                        .HasForeignKey("FacultateId");
+                });
+
+            modelBuilder.Entity("LegitimatieStudentDigitala.Models.User", b =>
+                {
+                    b.HasOne("LegitimatieStudentDigitala.Models.Domeniu", null)
+                        .WithMany("Useri")
+                        .HasForeignKey("DomeniuId");
+
+                    b.HasOne("LegitimatieStudentDigitala.Models.Facultate", null)
+                        .WithMany("Administratori")
+                        .HasForeignKey("FacultateId");
+                });
+
+            modelBuilder.Entity("LegitimatieStudentDigitala.Models.Domeniu", b =>
+                {
+                    b.Navigation("Useri");
+                });
+
+            modelBuilder.Entity("LegitimatieStudentDigitala.Models.Facultate", b =>
+                {
+                    b.Navigation("Administratori");
+
+                    b.Navigation("Domenii");
                 });
 #pragma warning restore 612, 618
         }

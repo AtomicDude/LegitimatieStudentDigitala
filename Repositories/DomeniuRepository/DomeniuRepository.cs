@@ -16,5 +16,10 @@ namespace LegitimatieStudentDigitala.Repositories.DomeniuRepository
         {
             return _table.FirstOrDefault(x => x.Nume.Equals(name));
         }
+
+        public Domeniu GetByCod(string cod)
+        {
+            return _table.FirstOrDefault(x => x.Cod_Domeniu.Equals(cod));
+        }
     }
 }
